@@ -9,7 +9,7 @@ add_executable(vec_alloc_example vec_alloc_ex.c)
 add_executable(inn_prod_example inn_prod_ex.c inner_prod.h)
 add_executable(mat_alloc_example mat_alloc_ex.c mat_alloc.h)
 
-add_executable(omp_example scoping_experiment_1.c)
+add_executable(scoping_experiment scoping_experiment_1.c)
 
 find_package(OpenMP)
 if (OPENMP_FOUND)
@@ -17,5 +17,5 @@ if (OPENMP_FOUND)
     set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 
-    target_link_libraries(omp_example PUBLIC OpenMP::OpenMP_CXX)
+    target_link_libraries(scoping_experiment PUBLIC OpenMP::OpenMP_CXX)
 endif()
