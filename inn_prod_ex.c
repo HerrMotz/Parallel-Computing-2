@@ -19,7 +19,7 @@ int main() {
     }
 
     // compute with lib
-    int size_v = 7;
+    int size_v = 5;
     double* u2 = malloc(size_v * sizeof(double));
     double* v2 = malloc(size_v * sizeof(double));
     // init
@@ -27,10 +27,10 @@ int main() {
         u2[i] = 1;
         v2[i] = (double) i;
     }
-    double b2 = inner_product_double(size_v, u2, v2);
+    double b2 = inner_product_double_par(size_v, u2, v2);
 
     printf("example:  %d\n", b);
-    printf("with lib: %f", b2);
+    printf("with lib par: %f", b2);
 
     free(u);
     free(v);
