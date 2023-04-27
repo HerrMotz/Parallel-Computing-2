@@ -15,6 +15,7 @@ int** mat_alloc(int m, int n) {
         fprintf(stderr, "out of memory\n");
         exit(0);
     }
+
     *A = (int *)malloc( m * n * sizeof(int));
     for (int i = 0; i < m; i++) {
         A[i] = (*A + n*i);

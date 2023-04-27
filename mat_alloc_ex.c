@@ -22,7 +22,7 @@ int main()
         A[i] = (*A + N*i);
     }
 
-    A[0][0] = 2;
+    //A[0][0] = 2;
     A[3][4] = 3;
 
     printf("A_0,0: %d\n", A[0][0]);
@@ -33,6 +33,7 @@ int main()
 
     A = (int **) mat_alloc(M, N);
     A[3][4] = 1;
+    printf("A_0,0: %d\n", A[0][0]);
     printf("A_4,5: %d", A[3][4]);
 
     return 0;
