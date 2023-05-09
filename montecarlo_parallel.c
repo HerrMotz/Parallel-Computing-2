@@ -5,17 +5,21 @@
 #include <omp.h>
 
 int main() {
+    FILE * fp;
+
+    fp = fopen ("file.txt", "w+");
+    fprintf(fp, "%s %s %s %d", "We", "are", "in", 2012);
+
+
     int N = (int) 10e6;
     double pi, inside;
     srand( 1 );
 
-    omp_set_num_threads(4);
-    printf("Num threads: %d\n", omp_get_num_threads());
-
     double start_time = omp_get_wtime();
 
-#pragma omp parallel default(none) shared(pi, inside) firstprivate(N)
+#pragma omp parallel default(none) shared(pi, inside) firstprivate(N) num_threads(8)
 {
+    printf("thread: %d, num: %d\n", omp_get_thread_num(), omp_get_num_threads());
     double x, y, l;
     int local_inside = 0;
     for(int i = 0; i < N; i+=omp_get_num_threads()) {
@@ -33,8 +37,10 @@ int main() {
 
     double end_time = omp_get_wtime();
 
-    printf("pi: %2.20f\n", pi);
-    printf("Time: %lf s\n", end_time - start_time);
+    fprintf(fp, "pi: %2.20f\n", pi);
+    fprintf(fp, "Time: %lf s\n", end_time - start_time);
+
+    fclose(fp);
 
     return 0;
 }
