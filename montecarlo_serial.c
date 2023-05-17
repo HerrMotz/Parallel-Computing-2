@@ -5,7 +5,12 @@
 #include <omp.h>
 
 int main() {
-    int N = (int) 100e6;
+    FILE * fp;
+
+    fp = fopen ("benchmark.txt", "w+");
+    int N = (int) 10e6;
+    char name[] = "montecarlo_serial";
+
     int I = 0;
     double x,y,l, pi;
     srand( 1 );
@@ -27,6 +32,8 @@ int main() {
 
     printf("pi: %2.20f\n", pi);
     printf("Time: %lf s\n", end_time - start_time);
+
+    fprintf(fp, "%s,%d,%2.20f,%lf,%d\n", name, N, pi, end_time - start_time, omp_get_num_threads());
 
     return 0;
 }

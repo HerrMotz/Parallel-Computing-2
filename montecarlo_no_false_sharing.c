@@ -9,10 +9,10 @@
 int main() {
     FILE * fp;
 
-    fp = fopen ("benchmark_montecarlo_par.txt", "a+");
+    fp = fopen ("benchmark.txt", "a+");
+    char name[] = "montecarlo_no_false_sharing";
 
-    size_t num_threads = 8;
-    size_t N = (int) 100e6;
+    size_t N = (int) 10e6;
     size_t inside = 0;
     double pi = 0;
     srand( 1 );
@@ -20,8 +20,8 @@ int main() {
     double start_time = omp_get_wtime();
 
     // start parallel section
-#pragma omp parallel for reduction(+ : inside) default(none) firstprivate(N,num_threads)
-    for (size_t i = 0; i < N / num_threads; i++) {
+#pragma omp parallel for reduction(+ : inside) default(none) firstprivate(N)
+    for (size_t i = 0; i < N / omp_get_num_threads(); i++) {
         double x, y, l;
         y = (double) rand() / RAND_MAX;
         x = (double) rand() / RAND_MAX;
@@ -38,7 +38,7 @@ int main() {
     printf("pi: %2.20f\n", pi);
     printf("Time: %lf s\n", end_time - start_time);
 
-    fprintf(fp, "%d,%2.20f,%lf,%d\n", N, pi, end_time - start_time, omp_get_num_threads());
+    fprintf(fp, "%s,%d,%2.20f,%lf,%d\n", name, N, pi, end_time - start_time, omp_get_num_threads());
     fclose(fp);
 
     return 0;
