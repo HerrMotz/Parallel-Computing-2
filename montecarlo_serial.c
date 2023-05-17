@@ -5,7 +5,7 @@
 #include <omp.h>
 
 int main() {
-    int N = (int) 10e6;
+    int N = (int) 100e6;
     int I = 0;
     double x,y,l, pi;
     srand( 1 );
@@ -20,6 +20,7 @@ int main() {
             I++;
         }
     }
+
     pi = (double) I / N * 4;
 
     double end_time = omp_get_wtime();
