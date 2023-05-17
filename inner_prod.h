@@ -31,7 +31,7 @@ double inner_product_double_par(int n, const double *u, const double *v) {
         // we compute n elements
         // each thread has to compute r = n/m threads
 
-        int r = ceilf((float)n / (float)omp_get_num_threads());
+        int r = (int)ceilf((float)n / (float)omp_get_num_threads());
         double* v_private = malloc(r * sizeof(double));
 
         int j = 0;
